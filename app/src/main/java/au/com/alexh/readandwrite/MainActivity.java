@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText editText;
     public TextView textView;
     public Button save, load;
-    public String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ReadandWrite";
+    public String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/database";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +179,15 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_reset) {
+            editText.setText("");
+
+            File file = new File (path + "/savedFile.txt");
+            String [] saveText = String.valueOf("").split(System.getProperty("line.separator"));
+            Save (file, saveText);
+
+            textView.setText("output...");
+
         }
 
         return super.onOptionsItemSelected(item);
